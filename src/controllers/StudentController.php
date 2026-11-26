@@ -1,20 +1,27 @@
+
 <?php
-    require_once __DIR__ . '/../config/Database.php';
-    require_once __DIR__ . '/../models/Major.php';
 
-    class StudentController {
-        private Major $major;
+require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../models/student.php';
 
-        public function __construct() {
-            $database = new Databases();
-            $db = $database->connect();
+class StudentController {
 
-            $this->major = new Major($db);
-        }   
+    private Student $student;
 
-        public function index(): void {
-            $majors = $this->major->getAllMajors();
-            require_once __DIR__ . '/../views/Student/Major.php';
-        }
+    public function __construct() {
+
+        $database = new Databases();
+        $db = $database->connect();
+
+        $this->student = new Student($db);
     }
+
+    public function index(): void {
+
+        $students = $this->student->getAllStudents();
+
+        require __DIR__ . '/../views/Student/index.php';
+    }
+}
+
 ?>
